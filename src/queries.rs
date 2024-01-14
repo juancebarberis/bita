@@ -15,3 +15,5 @@ pub(crate) const DELETE_ENTRY: &str = "DELETE FROM entries WHERE id = :id";
 pub(crate) const SELECT_ONE_ENTRY: &str = "SELECT * FROM entries WHERE id = :id";
 
 pub(crate) const SELECT_ALL_ENTRIES: &str = "SELECT * FROM entries ORDER BY created_at DESC";
+
+pub(crate) const SELECT_LATEST_ENTRY: &str = "SELECT * FROM entries ORDER BY created_at DESC LIMIT 1";

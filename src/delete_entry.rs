@@ -1,24 +1,35 @@
 use std::process::exit;
-use crate::constants;
-use crate::constants::ENTRY_ID_SIZE;
-use crate::queries::DELETE_ENTRY;
-use crate::sqlite::sqlite_conn;
+use crate::constants::{
+    CONSIDERING_LATEST_ID_MSG,
+    ENTRY_NOT_FOUND_MSG,
+    NO_ENTRIES_FOUND_MSG,
+    SUCCESSFULLY_DELETED_ENTRY_MSG
+};
+use crate::entries_repository::{
+    delete_by_id,
+    get_latest_entry_id
+};
 
-pub(crate) fn delete_entry(id: String) {
-    if id.chars().count() != ENTRY_ID_SIZE {
-        println!("Invalid id format");
-        exit(1);
-    }
-    let connection = sqlite_conn().unwrap();
-    let mut statement = connection.prepare(DELETE_ENTRY).unwrap();
-    statement.bind((":id", id.trim())).unwrap();
-    statement.next().unwrap();
-    let rows_affected = connection.total_change_count();
-
-    if rows_affected > 0 {
-        println!("{} {}", constants::SUCCESSFULLY_DELETED_NEW_ENTRY_MSG, id);
+pub(crate) fn delete_entry(param: String) {
+    let id: String;
+    if param.eq("--latest") {
+        let latest_entry_id = get_latest_entry_id();
+        if latest_entry_id.is_err() {
+            println!("{}", NO_ENTRIES_FOUND_MSG);
+            exit(1);
+        }
+        id = latest_entry_id.unwrap();
+        println!("{} {}", CONSIDERING_LATEST_ID_MSG, id.clone());
     } else {
-        println!("{} {}", constants::ENTRY_NOT_FOUND_MSG, id);
+        id = param;
+    }
+
+    if delete_by_id(id.clone()) > 0 {
+        println!("{} {}", SUCCESSFULLY_DELETED_ENTRY_MSG, id);
+    } else {
+        println!("{}", ENTRY_NOT_FOUND_MSG);
         exit(1);
     }
 }
+
+
