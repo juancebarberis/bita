@@ -13,7 +13,7 @@ pub(crate) fn new_entry(message: String) {
     let mut statement = connection.prepare(query).unwrap();
     statement.bind((":id", id.trim())).unwrap();
     statement.bind((":message", message.trim())).unwrap();
-    statement.bind((":created_at", get_now_timestamp())).unwrap();
+    statement.bind((":created_at", get_now_timestamp().trim())).unwrap();
     statement.next().unwrap();
     println!("{} {}", constants::SUCCESSFULLY_SAVED_NEW_ENTRY_MSG, id);
 }

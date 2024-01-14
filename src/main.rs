@@ -5,10 +5,12 @@ mod version;
 mod delete_entry;
 mod sqlite;
 mod timestamps;
+mod view_entries;
 
 use std::env;
 use std::process::exit;
 use colored::Colorize;
+use crate::view_entries::{get_entries, get_entry};
 
 fn main() {
     match env::args().nth(1) {
@@ -28,6 +30,12 @@ fn exec(command: String) {
         }
         "d" | "delete" => {
             delete_entry::delete_entry(env::args().nth(2).unwrap());
+        }
+        "a" | "all" => {
+            get_entries();
+        }
+        "g" | "get" => {
+            get_entry(env::args().nth(2).unwrap());
         }
         "c" | "config" => {
             println!("Not implemented yet...");

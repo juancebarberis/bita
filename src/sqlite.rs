@@ -1,4 +1,5 @@
 use std::path::Path;
+use std::process::exit;
 use sqlite::Connection;
 use crate::constants;
 
@@ -8,8 +9,8 @@ pub(crate) fn get_sqlite_db_path() -> String {
             return format!("{}/.bita/bita.db", path.as_path().display().to_string());
         },
         None => {
-            println!("Impossible to get your home dir!");
-            panic!();
+            println!("{}", constants::COULD_NOT_FIND_HOME_DIR_MSG);
+            exit(1);
         },
     }
 }
@@ -28,7 +29,7 @@ pub(crate) fn init_sqlite_db_if_does_not_exists() {
     CREATE TABLE entries (
         id TEXT,
         message TEXT,
-        created_at NUMERIC
+        created_at TEXT
         );
     ";
     connection.execute(query).unwrap();
