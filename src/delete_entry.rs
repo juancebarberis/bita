@@ -12,7 +12,7 @@ use crate::entries_repository::{
 
 pub(crate) fn delete_entry(param: String) {
     let id: String;
-    if param.eq("--latest") {
+    if param.eq("--latest") || param.eq("--l") {
         let latest_entry_id = get_latest_entry_id();
         if latest_entry_id.is_err() {
             println!("{}", NO_ENTRIES_FOUND_MSG);
