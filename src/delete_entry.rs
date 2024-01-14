@@ -1,6 +1,7 @@
 use std::process::exit;
 use crate::constants;
 use crate::constants::ENTRY_ID_SIZE;
+use crate::queries::DELETE_ENTRY;
 use crate::sqlite::sqlite_conn;
 
 pub(crate) fn delete_entry(id: String) {
@@ -9,8 +10,7 @@ pub(crate) fn delete_entry(id: String) {
         exit(1);
     }
     let connection = sqlite_conn().unwrap();
-    let query = "DELETE FROM entries WHERE id = :id";
-    let mut statement = connection.prepare(query).unwrap();
+    let mut statement = connection.prepare(DELETE_ENTRY).unwrap();
     statement.bind((":id", id.trim())).unwrap();
     statement.next().unwrap();
     let rows_affected = connection.total_change_count();

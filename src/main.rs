@@ -6,6 +6,7 @@ mod delete_entry;
 mod sqlite;
 mod timestamps;
 mod view_entries;
+mod queries;
 
 use std::env;
 use std::process::exit;

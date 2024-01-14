@@ -2,6 +2,7 @@ use std::path::Path;
 use std::process::exit;
 use sqlite::Connection;
 use crate::constants;
+use crate::queries::CREATE_ENTRIES_TABLE;
 
 pub(crate) fn get_sqlite_db_path() -> String {
     match home::home_dir() {
@@ -25,12 +26,5 @@ pub(crate) fn init_sqlite_db_if_does_not_exists() {
     }
     println!("{}", constants::BITA_DB_SQLITE_CREATION_MSG);
     let connection = sqlite_conn().unwrap();
-    let query = "
-    CREATE TABLE entries (
-        id TEXT,
-        message TEXT,
-        created_at TEXT
-        );
-    ";
-    connection.execute(query).unwrap();
+    connection.execute(CREATE_ENTRIES_TABLE).unwrap();
 }
