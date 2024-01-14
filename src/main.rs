@@ -7,6 +7,8 @@ mod sqlite;
 mod timestamps;
 
 use std::env;
+use std::process::exit;
+use colored::Colorize;
 
 fn main() {
     match env::args().nth(1) {
@@ -22,10 +24,10 @@ fn main() {
 fn exec(command: String) {
     match command.trim() {
         "n" | "new" => {
-            register_new_entry::new_entry(command);
+            register_new_entry::new_entry(env::args().nth(2).unwrap());
         }
         "d" | "delete" => {
-            delete_entry::delete_entry("Hola".parse().unwrap());
+            delete_entry::delete_entry(env::args().nth(2).unwrap());
         }
         "c" | "config" => {
             println!("Not implemented yet...");
@@ -36,6 +38,10 @@ fn exec(command: String) {
         "h" | "help" => {
             help::help();
         }
-        _ => {}
+        _ => {
+            println!("Invalid command! Check {} for more info", "bita help".bold());
+            exit(1);
+        }
     }
+    exit(0);
 }

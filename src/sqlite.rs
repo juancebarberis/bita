@@ -25,7 +25,7 @@ pub(crate) fn init_sqlite_db_if_does_not_exists() {
     println!("{}", constants::BITA_DB_SQLITE_CREATION_MSG);
     let connection = sqlite_conn().unwrap();
     let query = "
-    CREATE TABLE events (
+    CREATE TABLE entries (
         id TEXT,
         message TEXT,
         created_at NUMERIC
