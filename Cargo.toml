@@ -6,7 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-json = "0.12.3"
 chrono = { version = "0.4.31", features = [] }
 log = "0.4.20"
 home = { version = "0.5.9", features = [] }
+sqlite = { version = "0.31.1", features = [] }
+uuid = { version = "1.6.1", features = ["v4", "fast-rng"] }
+colored = { version = "2.1.0", features = [] }
