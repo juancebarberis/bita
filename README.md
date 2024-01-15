@@ -16,6 +16,10 @@ Via wget
 sh -c "$(wget https://raw.githubusercontent.com/juancebarberis/bita/master/tools/install.sh -O -)"
 ```
 
+If you got some permission denied error, running the script with `sudo` may help.
+
+**After installation success, write `bita` in your terminal, and it should display the all the help info.**
+
 ## Usage
 
 Create new entries with the `new` command.
