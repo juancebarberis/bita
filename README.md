@@ -1,5 +1,7 @@
 # Bita
 
+![workflow status](https://github.com/juancebarberis/bita/actions/workflows/rust.yml/badge.svg)
+
 A simple, fast and offline command line tool to keep track of your daily events without leaving the terminal.
 
 (My first Rust adventure)
@@ -70,3 +72,19 @@ Entry deleted successfully f3e1e42d-197d-46ce-9d67-a62e0ecaa5f6
 ```
 
 For more info, check the `src/help.rs` file.
+
+## Database
+
+Bita uses a sqlite database. It's stored in your home directory, at `/.bita` folder.
+
+You can easily take your bita.db file and read it with any tool you want.
+
+## Offline experience
+
+Bita is an offline experience. It does not send or receive any data from the internet nor other sources.
+
+It's basically an over-engineered notepad, but serves my needs perfectly.
+
+## Compiling
+
+Just clone the repo and run `cargo build` to compile your own Bita's binary.
