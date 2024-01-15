@@ -5,7 +5,7 @@ use chrono::{DateTime, FixedOffset, Local, TimeZone, Utc};
 const ONE_DAY_IN_SECONDS: u64 = 24 * 60 * 60;
 
 pub(crate) fn get_now_iso_timestamp() -> String {
-    return now().to_rfc3339();
+    now().to_rfc3339()
 }
 
 pub(crate) fn get_today_date() -> String {
@@ -26,9 +26,9 @@ fn now() -> DateTime<FixedOffset> {
     let now = now.with_timezone(
         Local::now().offset()
     );
-    return now;
+    now
 }
 
 fn system_timezone_offset() -> u64 {
-    return Local.timestamp_opt(0, 0).unwrap().offset().local_minus_utc().abs() as u64;
+    return Local.timestamp_opt(0, 0).unwrap().offset().local_minus_utc().unsigned_abs() as u64;
 }

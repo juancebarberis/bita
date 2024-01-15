@@ -77,5 +77,5 @@ fn get_param_or_exit(nth: usize, param_name: &str) -> String {
         println!("Check {} for help", "bita help".bold());
         exit(1);
     }
-    return param.unwrap();
+    param.unwrap()
 }

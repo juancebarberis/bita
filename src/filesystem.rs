@@ -5,7 +5,7 @@ use crate::constants::{COULD_NOT_CREATE_DOT_BITA_FOLDER_MSG, COULD_NOT_FIND_HOME
 pub(crate) fn get_dot_bita_folder_path() -> String {
     match home::home_dir() {
         Some(path) => {
-            return format!("{}/.bita", path.as_path().display().to_string());
+            format!("{}/.bita", path.as_path().display())
         },
         None => {
             println!("{}", COULD_NOT_FIND_HOME_DIR_MSG);

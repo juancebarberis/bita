@@ -9,7 +9,7 @@ pub(crate) fn get_latest_entry_id() -> Result<String, Error> {
     while let Ok(State::Row) = statement.next() {
         return Ok(statement.read::<String, _>("id").unwrap());
     }
-    return Err(Error::default());
+    Err(Error)
 }
 
 pub(crate) fn delete_by_id(id: String) -> usize {
@@ -17,5 +17,5 @@ pub(crate) fn delete_by_id(id: String) -> usize {
     let mut statement = connection.prepare(DELETE_ENTRY).unwrap();
     statement.bind((":id", id.trim())).unwrap();
     statement.next().unwrap();
-    return connection.total_change_count();
+    connection.total_change_count()
 }

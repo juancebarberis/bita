@@ -5,11 +5,11 @@ use crate::filesystem::{create_dot_bita_folder_if_does_not_exists, get_dot_bita_
 use crate::queries::CREATE_ENTRIES_TABLE;
 
 pub(crate) fn get_sqlite_db_path() -> String {
-    return format!("{}/bita.db", get_dot_bita_folder_path());
+    format!("{}/bita.db", get_dot_bita_folder_path())
 }
 
 pub(crate) fn sqlite_conn() -> sqlite::Result<Connection> {
-    return sqlite::open(get_sqlite_db_path());
+    sqlite::open(get_sqlite_db_path())
 }
 
 pub(crate) fn init_sqlite_db_if_does_not_exists() {
