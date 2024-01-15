@@ -42,7 +42,9 @@ fn exec(command: String) {
             );
         }
         "a" | "all" => {
-            get_entries();
+            get_entries(
+                env::args().nth(2)
+            );
         }
         "g" | "get" => {
             get_entry(
