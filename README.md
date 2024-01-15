@@ -1,6 +1,6 @@
 # Bita
 
-A simple and fast command line tool to keep track of your daily events without leaving the terminal.
+A simple, fast and offline command line tool to keep track of your daily events without leaving the terminal.
 
 (My first Rust adventure)
 
