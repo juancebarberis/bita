@@ -44,7 +44,7 @@ pub(crate) fn get_entries() {
 fn print_entry(statement: &Statement) {
     println!(
         "{} (Timestamp: {})",
-        statement.read::<String, _>("id").unwrap().green(),
+        statement.read::<String, _>("id").unwrap().bright_green(),
         statement.read::<String, _>("created_at").unwrap()
     );
     println!("{}", statement.read::<String, _>("message").unwrap());

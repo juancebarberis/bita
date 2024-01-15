@@ -1,6 +1,6 @@
 mod constants;
 mod help;
-mod register_new_entry;
+mod new_entry;
 mod version;
 mod delete_entry;
 mod sqlite;
@@ -12,6 +12,10 @@ mod entries_repository;
 use std::env;
 use std::process::exit;
 use colored::Colorize;
+use crate::delete_entry::delete_entry;
+use crate::help::help;
+use crate::new_entry::new_entry;
+use crate::version::version;
 use crate::view_entries::{get_entries, get_entry};
 
 fn main() {
@@ -20,7 +24,7 @@ fn main() {
             exec(message);
         }
         None => {
-            help::help();
+            help();
         }
     }
 }
@@ -28,30 +32,47 @@ fn main() {
 fn exec(command: String) {
     match command.trim() {
         "n" | "new" => {
-            register_new_entry::new_entry(env::args().nth(2).unwrap());
+            new_entry(
+                get_param_or_exit(2, "message")
+            );
         }
         "d" | "delete" => {
-            delete_entry::delete_entry(env::args().nth(2).unwrap());
+            delete_entry(
+                get_param_or_exit(2, "ID, --latest|-l")
+            );
         }
         "a" | "all" => {
             get_entries();
         }
         "g" | "get" => {
-            get_entry(env::args().nth(2).unwrap());
+            get_entry(
+                get_param_or_exit(2, "ID, --latest|-l")
+            );
         }
         "c" | "config" => {
             println!("Not implemented yet...");
         }
         "v" | "version" => {
-            version::version();
+            version();
         }
         "h" | "help" => {
-            help::help();
+            help();
         }
         _ => {
-            println!("Invalid command! Check {} for more info", "bita help".bold());
+            println!("Invalid command");
+            println!("Check {} for help", "bita help".bold());
             exit(1);
         }
     }
     exit(0);
+}
+
+fn get_param_or_exit(nth: usize, param_name: &str) -> String {
+    let param = env::args().nth(nth);
+    if param.is_none() {
+        println!("Param {} required", param_name.bright_cyan());
+        println!("Check {} for help", "bita help".bold());
+        exit(1);
+    }
+    return param.unwrap();
 }
