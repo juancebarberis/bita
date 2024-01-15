@@ -8,6 +8,7 @@ mod timestamps;
 mod view_entries;
 mod queries;
 mod entries_repository;
+mod filesystem;
 
 use std::env;
 use std::process::exit;
